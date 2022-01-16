@@ -30,9 +30,9 @@
 name: Java CI with Maven
 on:
   push:
-    branches: [ Ikechukwu ]
+    branches: [ main ]
   pull_request:
-    branches: [ Ikechukwu ]
+    branches: [ main ]
 jobs:
   build-test:
     runs-on: ubuntu-latest

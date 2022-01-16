@@ -14,5 +14,6 @@ class MvnTest {
     @Test
     void addTwoNumbers() {
         assertEquals(10, Mvn.addTwoNumbers(5, 2));
-    }
+        assertEquals(10, Mvn.addTwoNumbers(13, 10))
+;    }
 }
