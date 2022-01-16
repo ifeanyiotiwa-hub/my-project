@@ -1,0 +1,55 @@
+#name: JAVA CI WITH MAVEN #The name of the workflow as it will appear in the Actions tab of the GitHub repository.
+##Specifies the trigger for this workflow. This example uses the push event, so a workflow run is triggered every time someone pushes a change to the repository or merges a pull request. This is triggered by a push to every branch;
+#
+#on:
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+#
+#jobs:
+#  build:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '11'
+#          distribution: 'adopt'
+#          cache: maven
+#      - name: Build with Maven
+#        run: mvn -B package --file pom.xml
+#
+#  test:
+#    runs-on: ubuntu-latest
+
+
+name: Java CI with Maven
+on:
+  push:
+    branches: [ Ikechukwu ]
+  pull_request:
+    branches: [ Ikechukwu ]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 16 for x64
+        uses: actions/setup-java@v1
+        with:
+          java-version: '16'
+          architecture: x64
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build and Test with Maven
+        run: |
+          mvn -B package --file pom.xml -Dspring.profiles.active=test
